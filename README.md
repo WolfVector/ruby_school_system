@@ -1,5 +1,7 @@
 # School System
 
+![Image](screen.jpg)
+
 A simplistic school system that I made when I was learning Ruby On Rails. It incorporates an <a href="https://github.com/WolfVector/ruby_auth" target="_blank">auth system</a> I also made.
 
 The school system handles
