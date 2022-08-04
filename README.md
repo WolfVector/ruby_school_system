@@ -1,6 +1,6 @@
 # School System
 
-![Image](screen_1.jpg)
+<img src="screen_1.jpg" alt="School" width="1000" height="400" />
 
 A simplistic school system that I made when I was learning Ruby On Rails. It incorporates an <a href="https://github.com/WolfVector/ruby_auth" target="_blank">auth system</a> I also made.
 
