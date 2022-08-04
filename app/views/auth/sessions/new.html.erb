@@ -1,0 +1,54 @@
+<style type="text/css">
+	@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+    body {
+        background-color: #535fe6;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300
+    }
+
+    .card {
+        border: none;
+        padding: 20px;
+        background-color: #1c1e21;
+        color: #fff
+    }
+</style>
+
+<div class="container mt-5 mb-5 ">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5">
+                <h5 class="mt-3">Login</h5> 
+                <small class="mt-2 text-muted">
+                    Ingreso a plataforma.
+                </small>
+                <%= render partial: "auth/shared/flash_errors", locals: {  object: flash } %>
+
+				<%= form_with url: login_path, scope: :user do |form| %>
+					
+
+					<div class="mt-3 form-input"> 
+						<%= form.email_field :email, class: 'form-control text-white bg-dark', required: true, placeholder: 'Email' %>
+					</div>
+
+					<div class="mt-4 form-input">
+						<%= form.password_field :password, class: 'form-control text-white bg-dark', required: true, placeholder: 'Password' %>
+					</div>
+
+					<div>
+						<%= form.label :remember_me %>
+						<%= form.check_box :remember_me %>
+					</div>
+
+					<%= form.submit "Enivar", class: 'btn btn-primary mt-4 signup' %>
+
+				<% end %>
+
+				<div class="text-center mt-4"> 
+					<span>Aún no te has registrado?</span> <a href="/auth/sign_up" class="text-decoration-none">Login</a> 
+				</div>
+           </div>
+        </div>
+    </div>
+</div>

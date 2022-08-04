@@ -1,0 +1,81 @@
+<style type="text/css">
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+    body {
+        background-color: #535fe6;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300
+    }
+
+    .card {
+        border: none;
+        padding: 20px;
+        background-color: #1c1e21;
+        color: #fff
+    }
+
+    .circle {
+        height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #5855e7;
+        color: #fff;
+        font-size: 10px;
+        border-radius: 50%
+    }
+
+
+</style>
+
+<div class="container mt-5 mb-5 ">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5"> <span class="circle"><i class="fa fa-check"></i></span>
+                <h5 class="mt-3">Registrar</h5> 
+                <small class="mt-2 text-muted">
+                    Proceso de registro para plataforma educativa.
+                </small>
+				<%= form_with model: @user, url: sign_up_path do |form| %>
+					<%= render partial: "auth/shared/form_errors", locals: {  object: form.object } %>
+
+					<div class="mt-3 form-input"> 
+						<%= form.email_field :email, class: 'form-control text-white bg-dark', required: true, placeholder: 'Email' %>
+					</div>
+
+					<div class="mt-3 form-input"> 
+						<%= form.text_field :matricula, class: 'form-control text-white bg-dark', required: true, placeholder: 'Matrícula' %>
+					</div>
+
+					<div class="mt-3 form-input"> 
+						<%= form.text_field :nombre, class: 'form-control text-white bg-dark', required: true, placeholder: 'Nombre' %>
+					</div>
+
+					<div class="mt-3 form-input"> 
+						<%= form.text_field :apaterno, class: 'form-control text-white bg-dark', required: true, placeholder: 'Apellido Paterno' %>
+					</div>
+
+					<div class="mt-3 form-input"> 
+						<%= form.text_field :amaterno, class: 'form-control text-white bg-dark', required: true, placeholder: 'Apellido Materno' %>
+					</div>
+
+					<div class="mt-4 form-input">
+						<%= form.password_field :password, class: 'form-control text-white bg-dark', required: true, placeholder: 'Password' %>
+					</div>
+
+					<div class="mt-4 form-input">
+						<%= form.password_field :password_confirmation, class: 'form-control text-white bg-dark',required: true, placeholder: 'Confirmación de password' %>
+					</div>
+
+					<%= form.submit "Enivar", class: 'btn btn-primary mt-4 signup' %>
+
+				<% end %>
+
+				<div class="text-center mt-4"> 
+					<span>Ya estás registrado?</span> <a href="/auth/login" class="text-decoration-none">Login</a> 
+				</div>
+           </div>
+        </div>
+    </div>
+</div>

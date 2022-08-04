@@ -1,0 +1,41 @@
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white vh-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Editar</h5> 
+	        <%= render partial: "auth/shared/flash_errors", locals: {  object: flash } %>
+
+	    	<%= form_with url: admin_administration_edit_path, scope: :admin, method: :put do |form| %>
+
+	    		<% if @user_updated.present? && @user_updated.errors.any? %>
+	    			<ul>
+						<% @user_updated.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+						<% end %>
+					</ul>
+	    		<% end %>
+	    		
+	    		<div class="mt-3 form-input col-md-4">
+	    			<%= form.collection_select :admin_id, Admin.all, :id, :email, { :prompt => "Please Select" }, { :class=> 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus'} %>
+	    		</div>
+
+	    		<div class="mt-4 form-input col-md-4">
+						<%= form.password_field :password, class: 'form-control text-white bg-dark form-control-sm form-control-focus form-no-radius', placeholder: 'Password' %>
+				</div>
+
+				<div class="mt-4 form-input col-md-4">
+					<%= form.password_field :password_confirmation, class: 'form-control text-white bg-dark form-control-sm form-control-focus form-no-radius', placeholder: 'Confirmación de password' %>
+				</div>
+
+				<div class="mt-4 form-check">
+					<%= form.label "Eliminar", class: "form-check-label" %>
+					<%= form.check_box :delete, class: 'form-check-input' %>
+				</div>
+
+				<%= form.submit "Actualizar", class: 'btn btn-primary mt-4 signup' %>
+	    	<% end %>
+	    </div>
+	</div>
+</div>

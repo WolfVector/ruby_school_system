@@ -1,0 +1,4 @@
+window.EDUCA_OK = true;
+
+window.EDUCA_INSC_ERROR_YA_EXISTIA = 50;
+window.EDUCA_INSC_ERROR_LIMITE = 51;

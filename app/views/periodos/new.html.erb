@@ -1,0 +1,25 @@
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white vh-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Crear</h5>
+	        <%= render partial: "auth/shared/flash_errors", locals: {  object: flash } %>
+	    
+	        <%= form_with model: @periodo do |form| %>
+	        	<%= render partial: "auth/shared/form_errors", locals: {  object: form.object } %>
+
+	        	<div class="mt-4 form-input col-md-4"> 
+					<%= form.text_field :periodo, class: 'form-control form-control-focus form-control-sm text-white bg-dark', required: true, placeholder: 'Periodo' %>
+				</div>
+
+				<div class="mt-5 form-input col-md-2"> 
+					<%= form.select :habilitar, [['Habilitar', 'true'], ['Deshabilitar', 'false']], {:include_blank => "Seleccionar estatus"}, { :class => 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus' } %>
+				</div>
+
+	    		<%= form.submit "Enviar", class: 'btn btn-primary mt-4 signup' %>
+	        <% end %>
+	    </div>
+	</div>
+</div>

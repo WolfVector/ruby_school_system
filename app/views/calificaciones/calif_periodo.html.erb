@@ -1,0 +1,24 @@
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Lista</h5>
+
+	        <% @periodos.each do |periodo| %>
+	        	<% href = "" %>
+
+	        	<% if current_user.rol == 1 %>
+	        		<% href = "/calificaciones/alumno/#{periodo.id}" %>
+	        	<% elsif current_user.rol == 2 %>
+	        		<% href = "/calificaciones/maestro/#{periodo.id}" %>
+	        	<% end %>
+
+	        	<a class="" href="<%= href %>"><%= periodo.periodo %></a>
+
+	        <% end %>
+
+	    </div>
+	</div>
+</div>

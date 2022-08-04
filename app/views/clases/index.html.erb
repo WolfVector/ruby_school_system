@@ -1,0 +1,77 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%= javascript_include_tag 'request' %>
+<%= javascript_include_tag 'EDUCA_msg' %>
+
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Lista</h5>
+	        <div class="text-end mb-2">
+	        	<a href="/clases/new" class="btn btn-primary">Nuevo</a>
+	        </div>
+
+	        <div class="container">
+		        <% if @clases.any? %>
+		        	<% @clases.each do |clase| %>
+		        		<div class="row border-bottom border-dark">
+		        			<div class="col">
+				        		
+							    <span><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+							    <%= clase.asignatura.asignatura %>
+							        	
+				        		<div class="text-secondary">
+				        			<% if clase.maestro.present? %>
+				        				<small><%= clase.maestro.full_name %></small>
+				        			<% else %>
+				        				<small>Docente pendiente</small>
+				        			<% end %>
+				        		</div>
+
+				        		<div class="mt-4">
+
+				        			<% clase.horario.each do |horario| %>
+					        			<div class="row">
+					        				<div class="col-3 text-info"><%= horario.dia %>:</div>
+					        				<div class="col-3"><%= horario.get_horario %></div>
+					        			</div>
+				        			<% end %>
+				        		</div>
+
+				        		<div class="mt-2 mb-2">
+				        			<small>Disponible: <%= clase.count_alumnos %>/<%= clase.cupo %></small>
+				        		</div>
+
+			        		</div>
+
+			        		<div class="col">
+			        			
+			        			<a data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" href="/clases/<%= clase.id %>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+			        			
+			        			<button data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar" onclick="clase_eliminar(this, <%= clase.id %>)" class="btn-sm btn-danger ms-3"><i class="fa fa-trash" aria-hidden="true"></i></button>
+			        			
+			        		</div>
+		        		</div>
+		        	<% end %>
+		        <% else %>
+		        	<div class="text-center">
+		        		<div>
+		        			La lista de clases está vacía
+		        		</div>
+		        	</div>
+		        <% end %>
+	        </div>
+
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	async function clase_eliminar(self, id) {
+		EDUCA_req_delete(`/clases/${id}`, () => {
+			self.parentElement.parentElement.remove();
+		});	
+	}
+</script>

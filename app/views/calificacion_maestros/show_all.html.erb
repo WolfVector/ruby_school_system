@@ -1,0 +1,39 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%= javascript_include_tag 'EDUCA_const' %>
+<%= javascript_include_tag 'EDUCA_msg' %>
+<%= javascript_include_tag 'request' %>
+
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3"><%= @clase.materia %></h5>
+
+	        <% if @tomas_clases.present? && @tomas_clases.any? %>
+	        	<% @tomas_clases.each do |toma_clase| %>
+	        		<div class="row border-bottom border-dark">
+			        	<div class="col">
+					        		
+							<span><i class="fa fa-user" aria-hidden="true"></i></span>
+					        <small><%= toma_clase.alumno.full_name %></small>
+					        	
+				        </div>
+
+				        <div class="col">
+				        	<a href="/calificaciones/ver/alumno/<%= toma_clase.id %>"><button data-bs-toggle="tooltip" data-bs-placement="top" title="Ver calificaciones" class="btn-sm btn-primary ms-1"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
+
+				        	<a href="/calificaciones/agregar/alumno/<%= toma_clase.id %>"><button data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar calificación" class="btn-sm btn-info ms-1"><i class="fa fa-plus-square" aria-hidden="true"></i></button></a>
+				        			
+				        	<button data-bs-toggle="tooltip" data-bs-placement="top" title="Ver asistencias" class="btn-sm btn-warning ms-1" onclick="EDUCA_clase_asistencia(this, <%= toma_clase.alumno_id %>, <%= toma_clase.id %>)"><i class="fa fa-book" aria-hidden="true"></i></button>
+
+				        	<a href="/calificaciones/modificar/asistencias/<%= toma_clase.id %>"><button data-bs-toggle="tooltip" data-bs-placement="top" title="Modificar asistencias" class="btn-sm btn-info ms-1"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></button></a>		
+				        </div>
+			        </div>
+	        	<% end %>
+	        <% end %>
+
+	    </div>
+	</div>
+</div>

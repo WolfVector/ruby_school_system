@@ -1,0 +1,65 @@
+<%= javascript_include_tag 'EDUCA_dom' %>
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Crear</h5>
+	        <%= render partial: "auth/shared/flash_errors", locals: {  object: flash } %>
+	    
+	        <%= form_with model: @clase do |form| %>
+	        	<%= render partial: "auth/shared/form_errors", locals: {  object: form.object } %>
+
+	        	<div class="mt-3 form-input col-md-4">
+	    			<%= form.collection_select :maestro_id, Maestro.all, :id, :full_name, { :prompt => "Seleccionar profesor" }, { :class=> 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus'} %>
+	    		</div>
+
+	        	<div class="mt-3 form-input col-md-4">
+	    			<%= form.collection_select :asignatura_id, Asignatura.all, :id, :asignatura, { :prompt => "Seleccionar materia" }, { :class=> 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus'} %>
+	    		</div>
+
+	    		<div class="mt-3 form-input col-md-4">
+	    			<%= form.collection_select :periodo_id, Periodo.all, :id, :periodo, { :prompt => "Seleccionar periodo" }, { :class=> 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus'} %>
+	    		</div>
+
+	    		<div class="mt-3 form-input col-md-4">
+	    			<%= form.collection_select :carrera_id, Carrera.all, :id, :carrera, { :prompt => "Seleccionar carrera" }, { :class=> 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus'} %>
+	    		</div>
+
+	        	<div class="mt-4 form-input col-md-4"> 
+					<%= form.text_field :grupo, class: 'form-control form-control-focus form-control-sm text-white bg-dark', required: true, placeholder: 'Grupo' %>
+				</div>
+
+				<div class="mt-4 form-input col-md-4"> 
+					<%= form.text_field :cupo, class: 'form-control form-control-focus form-control-sm text-white bg-dark', required: true, placeholder: 'Cupo' %>
+				</div>
+
+				<div id="horario_div">
+
+					<div class="row mt-5">
+						<div class="mt-5 form-input col-md-2"> 
+							<%= form.select :dia, ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"], {:include_blank => "Seleccionar día"}, { :name => "clase[dia][]", :class => 'form-select text-white bg-dark form-control-sm form-no-radius form-control-focus' } %>
+						</div>
+
+						<div class="mt-3 form-input col-md-2"> 
+							<%= form.label 'Inicio', class: 'form-label' %>
+							<%= form.time_field :hora, name: "clase[hora][]", class: 'form-control form-control-focus form-control-sm text-white bg-dark', required: true, placeholder: 'Hora' %>
+						</div>
+
+						<div class="mt-3 form-input col-md-2">
+							<%= form.label 'Fin', class: 'form-label' %> 
+							<%= form.time_field :fin, name: "clase[fin][]", class: 'form-control form-control-focus form-control-sm text-white bg-dark', required: true, placeholder: 'Hora' %>
+						</div>
+					</div>
+				</div>
+
+				<div class="mt-4">
+					<button type="button" onclick="new_horario_field()" class="btn btn-info">Nuevo hora y día</button><br>
+				</div>
+
+	    		<%= form.submit "Enviar", class: 'btn btn-primary mt-4 signup' %>
+	        <% end %>
+	    </div>
+	</div>
+</div>

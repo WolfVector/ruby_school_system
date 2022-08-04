@@ -1,0 +1,29 @@
+<div class="custom-font-family bg-custom-purple container-fluid vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<% if user_signed_in? %>
+				<%= render partial: "shared/menu"%>
+			<% else %>
+				<h5>Plataforma educativa</h5>
+			<% end %>
+		</div>
+		<% if user_signed_in? %>
+			<div class="container m-auto">
+				<div class="text-center mt-5">
+					<div>
+						Logotipo y presentación de la institución
+					</div>
+				</div>
+			</div>
+		<% else %>
+		<div class="card border-dark bg-dark-light m-auto mt-5 w-75 h-25 p-2 text-center">
+			<div class="mt-4">
+				<a class="text-decoration-none" href="/auth/login">Iniciar Sesión</a>
+			</div>
+			<div class="mt-4">
+				<a class="text-decoration-none" href="/auth/sign_up">Registrarse</a>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>

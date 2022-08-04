@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  calificacion: 1.5
+  habilitar: false
+  codigo: 1
+  periodo: one
+
+two:
+  calificacion: 1.5
+  habilitar: false
+  codigo: 1
+  periodo: two

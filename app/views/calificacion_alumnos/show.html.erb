@@ -1,0 +1,101 @@
+<div class="custom-font-family bg-custom-purple container-fluid min-vh-100 pt-1">
+	<div class="bg-dark-light text-white h-100">
+		<div class="ms-1 me-1 p-3 border-bottom border-dark">
+			<%= render partial: "shared/menu"%>
+		</div>
+	    <div class="ms-1 me-1 p-3">
+	        <h5 class="mt-3">Calificaciones</h5>
+
+	        <% if @tomo_clase.present? %>
+	        	<% clase = @tomo_clase.clase %>
+
+	        <div class="container mt-5 border-bottom border-dark">
+	        	<div class="row">
+			        <div class="col">       		
+						<span><i class="fa fa-bookmark" aria-hidden="true"></i></span>
+							<%= clase.asignatura.asignatura %>
+									        	
+						<div class="text-secondary">
+						    <% if clase.maestro.present? %>
+						    	<small><%= clase.maestro.full_name %></small>
+						    <% else %>
+						        <small>Docente pendiente</small>
+						    <% end %>
+						</div>				
+				    </div>				        
+			    </div>
+
+			    <%= @tomo_clase.calificacion[0].calificacion %>
+
+			    <% parcial1 = @tomo_clase.calificacion[0].get_nota_or 0 %>
+			    <% parcial2 = @tomo_clase.calificacion[1].get_nota_or 0 %>
+			    <% parcial3 = @tomo_clase.calificacion[2].get_nota_or 0 %>
+			    <% final = @tomo_clase.calificacion[3].get_nota_or 0 %>
+			    <% total = CalificacionAlumnosController.calificacion_total(parcial1, parcial2, parcial3, final) %>
+			    <% total_string = '' %>
+
+			    <% if @tomo_clase.total? %>
+			    	<% total_string = total %>
+			    <% end %>
+
+			    <div class="row mt-4">
+			    	<div class="col">
+			    		<h5>Total</h5>
+			    		<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: <%= total %>%;" aria-valuenow="<%= total %>" aria-valuemin="0" aria-valuemax="100"><%= total %>%</div>
+						</div>
+						<div class="text-warning">
+							<small><%= total_string %>/100</small>
+						</div>
+			    	</div>
+			    </div>
+			    <div class="row mt-6">
+			    	<div class="col">
+			    		<h5>Primer parcial</h5>
+			    		<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: <%= parcial1 %>%;" aria-valuenow="<%= parcial1 %>" aria-valuemin="0" aria-valuemax="100"><%= parcial1 %>%</div>
+						</div>
+						<div class="text-warning">
+							<small><%= @tomo_clase.calificacion[0].get_nota_or '' %>/100</small>
+						</div>
+			    	</div>
+			    </div>
+			    <div class="row mt-6">
+			    	<div class="col">
+			    		<h5>Segundo parcial</h5>
+			    		<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: <%= parcial2 %>%;" aria-valuenow="<%= parcial2 %>" aria-valuemin="0" aria-valuemax="100"><%= parcial2 %>%</div>
+						</div>
+						<div class="text-warning">
+							<small><%= @tomo_clase.calificacion[1].get_nota_or '' %>/100</small>
+						</div>
+			    	</div>
+			    </div>
+			    <div class="row mt-6">
+			    	<div class="col">
+			    		<h5>Tercer parcial</h5>
+			    		<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: <%= parcial3 %>%;" aria-valuenow="<%= parcial3 %>" aria-valuemin="0" aria-valuemax="100"><%= parcial3 %>%</div>
+						</div>
+						<div class="text-warning">
+							<small><%= @tomo_clase.calificacion[2].get_nota_or '' %>/100</small>
+						</div>
+			    	</div>
+			    </div>
+			    <div class="row mt-6">
+			    	<div class="col">
+			    		<h5>Final</h5>
+			    		<div class="progress">
+						  <div class="progress-bar" role="progressbar" style="width: <%= final %>%;" aria-valuenow="<%= final %>" aria-valuemin="0" aria-valuemax="100"><%= final %>%</div>
+						</div>
+						<div class="text-warning">
+							<small><%= @tomo_clase.calificacion[3].get_nota_or '' %>/100</small>
+						</div>
+			    	</div>
+			    </div>
+			</div>
+	        <% end %>
+
+	    </div>
+	</div>
+</div>
